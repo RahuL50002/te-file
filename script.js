@@ -1,88 +1,62 @@
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const proposalBox = document.getElementById("proposalBox");
-const finalScreen = document.getElementById("finalScreen");
-const message = document.getElementById("message");
-const music = document.getElementById("music");
-const callBtn = document.getElementById("callBtn");
+let data = {
+  date: "",
+  food: "",
+  location: ""
+};
 
-/* NO button messages */
 const noMessages = [
-  "Are you sure? 🥺",
-  "Think again ❤️",
-  "Pleaseeee 😭",
-  "My heart says YES 💔",
-  "You can’t escape 🙈"
+  "Are you sure? 🥺","Think again ❤️","Pleaseeee 😭","Don’t break my heart 💔",
+  "Say YES 😚","I know you want to 😏","Last chance 🙈","Don’t be cruel 😢",
+  "YES is destiny 💍","Okay I’ll grow 😁"
 ];
 
-let noIndex = 0;
+let noCount = 0;
 let yesScale = 1;
 
-/* NO button logic */
-noBtn.addEventListener("click", () => {
-  noBtn.innerText = noMessages[noIndex % noMessages.length];
-  noIndex++;
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
 
-  yesScale += 0.15;
+noBtn.onclick = () => {
+  noBtn.innerText = noMessages[noCount % noMessages.length];
+  noCount++;
+  yesScale += 0.3;
   yesBtn.style.transform = `scale(${yesScale})`;
 
-  const x = Math.random() * 200 - 100;
-  const y = Math.random() * 200 - 100;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
-});
+  if (yesScale > 3) {
+    yesBtn.style.width = "100vw";
+    yesBtn.style.height = "100vh";
+    yesBtn.style.borderRadius = "0";
+  }
+};
 
-/* YES button logic */
-yesBtn.addEventListener("click", () => {
-  proposalBox.style.display = "none";
-  finalScreen.style.display = "block";
+yesBtn.onclick = () => showPage(2);
 
-  music.volume = 0.6;
-  music.play().catch(() => {});
+function saveDate() {
+  const date = document.getElementById("dateInput").value;
+  if (!date) return;
+  data.date = date;
+  document.getElementById("dateMsg").innerText =
+    "Your date with your Hubby is booked 😁";
+  setTimeout(() => showPage(3), 1200);
+}
 
-  const text = `
-<b>I love you, my baby girl ♥️</b><br><br>
+function selectFood(food) {
+  data.food = food;
+  showPage(4);
+}
 
-I will love you till the very last breath of my life —
-and even after that.<br><br>
+function selectLocation(loc) {
+  data.location = loc;
+  document.getElementById("summary").innerHTML = `
+    📅 Date: ${data.date}<br>
+    🍽 Food: ${data.food}<br>
+    📍 Location: ${data.location}<br><br>
+    I can’t wait to see you ❤️
+  `;
+  showPage(5);
+}
 
-I see our beautiful future together:
-a happy family,
-two lovely kids,
-and countless moments of love. 😍<br><br>
-
-I don’t want this marriage to stay in imagination.
-I want to live it with you in the real world 🌍<br><br>
-
-From the core of my heart 🫀
-From the aorta of my heart 💘
-From the arteries of my heart 😚
-From every cell of my body 💖<br><br>
-
-<b>“I love you, my future wife ♥️”</b><br><br>
-
-📞 <b>+91 8373038184</b><br><br>
-
-Forever yours,<br>
-<b>Your hubby 😁</b>
-`;
-
-  message.innerHTML = "";
-  let i = 0;
-
-  const typing = setInterval(() => {
-    if (text[i] === "<") {
-      const end = text.indexOf(">", i);
-      message.innerHTML += text.slice(i, end + 1);
-      i = end + 1;
-    } else {
-      message.innerHTML += text[i];
-      i++;
-    }
-
-    if (i >= text.length) {
-      clearInterval(typing);
-      callBtn.style.display = "inline-block";
-    }
-  }, 35);
-});
-
+function showPage(n) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById("page"+n).classList.add("active");
+}
