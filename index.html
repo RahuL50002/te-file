@@ -4,28 +4,54 @@
   <meta charset="UTF-8">
   <title>For My Laadoo ❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- PAGE 1 : PROPOSAL -->
-<section class="page active" id="page1">
-  <h1>Will you marry me, <span>Laadoo ❤️</span>?</h1>
-  <button id="yesBtn">Yes 💍</button>
-  <button id="noBtn">No 🙈</button>
+<section class="page active glass" id="page1">
+  <div class="photo-wrapper">
+    <img src="our-photo.jpg" class="couple-photo" alt="Our Photo">
+  </div>
+
+  <h1>
+    Will you marry me,<br>
+    <span>Laadoo ❤️</span>?
+  </h1>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 💍</button>
+    <button id="noBtn">No 🙈</button>
+  </div>
 </section>
 
-<!-- PAGE 2 : DATE -->
-<section class="page" id="page2">
+<!-- PAGE 2 : MESSAGE + VIDEO -->
+<section class="page glass" id="page2">
+  <video class="proposal-video" autoplay muted loop playsinline>
+    <source src="her.mp4" type="video/mp4">
+  </video>
+
+  <div class="message-box">
+    <p id="message"></p>
+  </div>
+
+  <button class="next-btn" id="toDateBtn">Next 💖</button>
+</section>
+
+<!-- PAGE 3 : DATE -->
+<section class="page glass" id="page3">
   <h2>On which date are you free to go on a date with me? 💖</h2>
   <input type="date" id="dateInput">
   <button onclick="saveDate()">Book Date</button>
   <p id="dateMsg"></p>
 </section>
 
-<!-- PAGE 3 : FOOD -->
-<section class="page" id="page3">
-  <h2>What do you want to eat on our date? 😋</h2>
+<!-- PAGE 4 : FOOD + LOCATION + SUMMARY -->
+<section class="page glass" id="page4">
+  <h2>Choose your date details 😍</h2>
+
+  <h3>🍽 What do you want to eat?</h3>
   <div class="grid">
     <button onclick="selectFood('Dahi Bada')">Dahi Bada</button>
     <button onclick="selectFood('Gupchup')">Gupchup</button>
@@ -35,13 +61,10 @@
     <button onclick="selectFood('French Fries')">French Fries</button>
     <button onclick="selectFood('Cold Drink')">Cold Drink</button>
     <button onclick="selectFood('Boba Drink')">Boba Drink</button>
-    <button onclick="selectFood('You 😁')">Wanna eat me? 😁</button>
+    <button onclick="selectFood('You 😁')">Wanna Eat Me? 😁</button>
   </div>
-</section>
 
-<!-- PAGE 4 : LOCATION -->
-<section class="page" id="page4">
-  <h2>Select location for our date 🌍</h2>
+  <h3>📍 Select location</h3>
   <div class="grid">
     <button onclick="selectLocation('Vrindavan')">Vrindavan</button>
     <button onclick="selectLocation('Kedarnath')">Kedarnath</button>
@@ -52,14 +75,17 @@
     <button onclick="selectLocation('Chandigarh')">Chandigarh</button>
     <button onclick="selectLocation('My Heart 😚')">My Heart 😚</button>
   </div>
+
+  <div id="summary"></div>
+
+  <a href="tel:+918373038184" class="call-btn">
+    💖 Call Your Hubby 📞
+  </a>
 </section>
 
-<!-- PAGE 5 : SUMMARY -->
-<section class="page" id="page5">
-  <h2>Your Date is Confirmed 😍</h2>
-  <p id="summary"></p>
-  <a href="tel:+918373038184" class="call-btn">📞 Call Your Hubby</a>
-</section>
+<audio id="music" preload="auto" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <script src="script.js"></script>
 </body>
